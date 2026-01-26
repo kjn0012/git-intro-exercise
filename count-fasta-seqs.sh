@@ -14,8 +14,8 @@
 #          >RMB3263_Cyrtodactylus_philippinicus_Negros
 #          CGGGCCCATACCCCGAAAATGTTGGTATAAACCCCTTCCTATACTAATAAACCCCATTATTTGATCACTATTACTAAC
 #          
-#          >CWL052_Cyrtodactylus_philippinicus_Negros
-#          CGGGCCCATACCCCGAAAATGTTGGTATAAACCCCTTCCTATACTAATAAACCCCATTATTTGATCACTATTACTAAC
+          >CWL052_Cyrtodactylus_philippinicus_Negros
+          CGGGCCCATACCCCGAAAATGTTGGTATAAACCCCTTCCTATACTAATAAACCCCATTATTTGATCACTATTACTAAC
 #
 #          If you run this script on this fasta file, you want to get the
 #          following output:          
