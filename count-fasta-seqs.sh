@@ -94,3 +94,7 @@ echo "$@"
 #
 # ADD YOUR CODE BELOW:
 
+for filepath in "$@"
+do
+   #YOUR CODE HERE
+done
