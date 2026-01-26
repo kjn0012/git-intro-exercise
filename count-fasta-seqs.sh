@@ -94,4 +94,4 @@ echo "$@"
 #
 # ADD YOUR CODE BELOW:
 
-# testing adding a line of code SB
+# for loop using basename to get name of file, then use grep/wc to get the number of lines?
