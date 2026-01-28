@@ -97,7 +97,7 @@
 total=0
 for file_path in "$@"
 do 
-	count=$(grep ">""$file_path" | wc -l) #assigns count the output of the piped command
+	count=$(grep ">" "$file_path" | wc -l) #assigns count the output of the piped command
 	total=$(expr $count + $total) # expr is a way of doing math in a shell script
 	file_name=$(basename $file_path)
 	echo $count $file_name
