@@ -14,8 +14,8 @@
 #          >RMB3263_Cyrtodactylus_philippinicus_Negros
 #          CGGGCCCATACCCCGAAAATGTTGGTATAAACCCCTTCCTATACTAATAAACCCCATTATTTGATCACTATTACTAAC
 #          
-          >CWL052_Cyrtodactylus_philippinicus_Negros
-          CGGGCCCATACCCCGAAAATGTTGGTATAAACCCCTTCCTATACTAATAAACCCCATTATTTGATCACTATTACTAAC
+#          >CWL052_Cyrtodactylus_philippinicus_Negros
+#         CGGGCCCATACCCCGAAAATGTTGGTATAAACCCCTTCCTATACTAATAAACCCCATTATTTGATCACTATTACTAAC
 #
 #          If you run this script on this fasta file, you want to get the
 #          following output:          
@@ -63,7 +63,6 @@
 # files that were 'given to' this script. The variable "$@" will be very useful
 # for this. Let's take a look at what it gives us:
 
-echo "$@"
 
 # How are you going to work with each file path?
 # HINT: for loop (remember "for do done"?)
@@ -92,9 +91,15 @@ echo "$@"
 #
 # Good luck!
 #
+# "$@" just has whatever arguement is added after the command
 # ADD YOUR CODE BELOW:
 
-for filepath in "$@"
-do
-   #YOUR CODE HERE
+total=0
+for file_path in "$@"
+do 
+	count=$(grep ">""$file_path" | wc -l) #assigns count the output of the piped command
+	total=$(expr $count + $total) # expr is a way of doing math in a shell script
+	file_name=$(basename $file_path)
+	echo $count $file_name
 done
+echo $total
