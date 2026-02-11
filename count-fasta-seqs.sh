@@ -94,12 +94,22 @@
 # "$@" just has whatever arguement is added after the command
 # ADD YOUR CODE BELOW:
 
+#!/bin/bash
+
 total=0
-for file_path in "$@"
-do 
-	count=$(grep ">" "$file_path" | wc -l) #assigns count the output of the piped command
-	total=$(expr $count + $total) # expr is a way of doing math in a shell script
-	file_name=$(basename $file_path)
-	echo $count $file_name
+
+for filepath in "$@"
+do
+    # Get just the filename, not the full path
+    filename=$(basename "$filepath")
+    
+    # Count sequences — in FASTA format, each sequence starts with ">"
+    count=$(grep -c ">" "$filepath")
+    
+    echo "$count $filename"
+    
+    # Add to total
+    total=$(expr $total + $count)
 done
-echo $total
+
+echo "$total"
