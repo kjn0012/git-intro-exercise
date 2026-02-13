@@ -1,7 +1,5 @@
 #!/bin/sh
 
-<<<<<<< HEAD
-#	Test
 # How this script should behave:
 #
 # INPUT:   Paths to one or more fasta sequence files
@@ -16,8 +14,8 @@
 #          >RMB3263_Cyrtodactylus_philippinicus_Negros
 #          CGGGCCCATACCCCGAAAATGTTGGTATAAACCCCTTCCTATACTAATAAACCCCATTATTTGATCACTATTACTAAC
 #          
-          >CWL052_Cyrtodactylus_philippinicus_Negros
-          CGGGCCCATACCCCGAAAATGTTGGTATAAACCCCTTCCTATACTAATAAACCCCATTATTTGATCACTATTACTAAC
+#          >CWL052_Cyrtodactylus_philippinicus_Negros
+#         CGGGCCCATACCCCGAAAATGTTGGTATAAACCCCTTCCTATACTAATAAACCCCATTATTTGATCACTATTACTAAC
 #
 #          If you run this script on this fasta file, you want to get the
 #          following output:          
@@ -64,95 +62,54 @@
 # The first thing you need to be able to do is access the paths to the fasta
 # files that were 'given to' this script. The variable "$@" will be very useful
 # for this. Let's take a look at what it gives us:
-=======
-$ sh run_tests.sh
->>>>>>> 4114a41 (Copies provided script)
 
-----------------------------------------------------------------------
-RUNNING TEST:
-  sh count-fasta-seqs.sh gekko-mindorensis.fasta
 
-*****************************************
-FAIL: Did not create the expected output!
-*****************************************
-Here is the expected output:
-19 gekko-mindorensis.fasta
-19
------------------------------------------
-Here is the observed output:
-gekko-mindorensis.fasta
-*****************************************
+# How are you going to work with each file path?
+# HINT: for loop (remember "for do done"?)
+#
+# To get the name of each file from the path, checkout the command 'basename':
+#
+#   $ man basename
+#
+# To count the number of sequences in each file, I recommend you checkout
+# 'grep' and 'wc':
+#
+#   $ man grep 
+#   $ man wc 
+#
+# WARNING about 'grep': ALWAYS quote the string that you are trying to find!
+# For example, do:
+#
+#   $ grep "string I want to find" file-i-want-to-find-it-in.txt
+#   **NOT**
+#   $ grep string I want to find file-i-want-to-find-it-in.txt # DON'T DO THIS!
+#
+# To keep a tally of the total number of sequences across all files, 'expr'
+# might be useful:
+#
+#   $ man expr 
+#
+# Good luck!
+#
+# "$@" just has whatever arguement is added after the command
+# ADD YOUR CODE BELOW:
 
-<<<<<<< HEAD
+#!/bin/bash
+
+total=0
+
 for filepath in "$@"
 do
-   #YOUR CODE HERE
+    # Get just the filename, not the full path
+    filename=$(basename "$filepath")
+    
+    # Count sequences — in FASTA format, each sequence starts with ">"
+    count=$(grep -c ">" "$filepath")
+    
+    echo "$count $filename"
+    
+    # Add to total
+    total=$(expr $total + $count)
 done
-=======
-Passed 0 out of 1 tests
-----------------------------------------------------------------------
 
-
-----------------------------------------------------------------------
-RUNNING TEST:
-  sh count-fasta-seqs.sh cyrtodactylus-philippinicus.fasta gekko-mindorensis.fasta insulasaurus-arborens.fasta
-
-*****************************************
-FAIL: Did not create the expected output!
-*****************************************
-Here is the expected output:
-20 cyrtodactylus-philippinicus.fasta
-19 gekko-mindorensis.fasta
-32 insulasaurus-arborens.fasta
-71
------------------------------------------
-Here is the observed output:
-cyrtodactylus-philippinicus.fasta gekko-mindorensis.fasta insulasaurus-arborens.fasta
-*****************************************
-
-Passed 0 out of 1 tests
-----------------------------------------------------------------------
-
-
-----------------------------------------------------------------------
-RUNNING TEST:
-  sh count-fasta-seqs.sh /home/jamie/Dropbox/projects/git-intro-exercise/tests/test_nested_singleton/input/gekko-mindorensis.fasta
-
-*****************************************
-FAIL: Did not create the expected output!
-*****************************************
-Here is the expected output:
-19 gekko-mindorensis.fasta
-19
------------------------------------------
-Here is the observed output:
-/home/jamie/Dropbox/projects/git-intro-exercise/tests/test_nested_singleton/input/gekko-mindorensis.fasta
-*****************************************
-
-Passed 0 out of 1 tests
-----------------------------------------------------------------------
-
-
-----------------------------------------------------------------------
-RUNNING TEST:
-  sh count-fasta-seqs.sh /home/jamie/Dropbox/projects/git-intro-exercise/tests/test_nested_files/input/*
-
-*****************************************
-FAIL: Did not create the expected output!
-*****************************************
-Here is the expected output:
-20 cyrtodactylus-philippinicus.fasta
-19 gekko-mindorensis.fasta
-32 insulasaurus-arborens.fasta
-71
------------------------------------------
-Here is the observed output:
-/home/jamie/Dropbox/projects/git-intro-exercise/tests/test_nested_files/input/cyrtodactylus-philippinicus.fasta /home/jamie/Dropbox/projects/git-intro-exercise/tests/test_nested_files/input/gekko-mindorensis.fasta /home/jamie/Dropbox/projects/git-intro-exercise/tests/test_nested_files/input/insulasaurus-arborens.fasta
-*****************************************
-
-Passed 0 out of 1 tests
-----------------------------------------------------------------------
-
-
-Some tests failed (see messages above)
->>>>>>> 4114a41 (Copies provided script)
+echo "$total"
