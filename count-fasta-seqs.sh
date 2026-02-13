@@ -98,6 +98,12 @@
 
 total=0
 
+#Sanity check to ensure files were provided
+if [ "$#" -eq 0 ]; then
+    echo "No files provided"
+    exit 0
+fi
+
 for filepath in "$@"
 do
     # Get just the filename, not the full path
